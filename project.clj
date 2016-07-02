@@ -6,7 +6,8 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [proto-repl "0.1.2"]
                  [proto-repl-charts "0.2.0"]
-                 [ring "1.5.0"]]
+                 [ring "1.5.0"]
+                 [compojure "1.5.1"]]
   :profiles
   {:dev {:source-paths ["src" "test"]
          :dependencies [[org.clojure/tools.namespace "0.2.11"]]}})
