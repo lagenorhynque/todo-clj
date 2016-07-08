@@ -13,6 +13,6 @@
         wrap-reload (try-resolve 'ring.middleware.reload/wrap-reload)]
     (if (and wrap-reload wrap-exceptions)
       (-> handler
-        wrap-exceptions
-        wrap-reload)
+          wrap-exceptions
+          wrap-reload)
       (throw (RuntimeException. "Middlware requires ring/ring-devel and prone.")))))

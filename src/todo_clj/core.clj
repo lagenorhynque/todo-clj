@@ -16,9 +16,8 @@
       handler)))
 
 (def app
-  (-> (routes
-        todo-routes
-        main-routes)
+  (-> (routes todo-routes
+              main-routes)
       (wrap wrap-dev (:dev env))))
 
 (defn start-server []
