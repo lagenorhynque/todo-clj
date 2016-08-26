@@ -14,7 +14,8 @@
         [:h2 "TODO 追加"]
         (hf/form-to
          [:post "/todo/new"]
-         [:input {:name :title :placeholder "TODOを入力してください"}]
+         [:input {:name :title
+                  :placeholder "TODOを入力してください"}]
          [:button.bg-green "追加"])]
        (layout/common req)))
 
@@ -24,3 +25,15 @@
           [:div.alert.alert-success [:strong msg]])
         [:h2 (:title todo)]]
        (layout/common req)))
+
+(defn todo-edit-view [req todo]
+  (let [todo-id (get-in req [:params :todo-id])]
+    (->> [:section.card
+          [:h2 "TODO 編集"]
+          (hf/form-to
+           [:post (str "/todo/" todo-id "/edit")]
+           [:input {:name :title
+                    :value (:title todo)
+                    :placeholder "TODOを入力してください"}]
+           [:button.bg-green "更新"])]
+         (layout/common req))))

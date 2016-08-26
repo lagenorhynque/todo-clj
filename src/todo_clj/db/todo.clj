@@ -3,7 +3,9 @@
             [todo-clj.db :as db]))
 
 (defn save-todo [title]
-  (jdbc/insert! db/db-spec :todo {:title title}))
+  (jdbc/insert! db/db-spec
+                :todo
+                {:title title}))
 
 (defn find-all-todos []
   (jdbc/query db/db-spec
@@ -12,3 +14,9 @@
 (defn find-first-todo [id]
   (first (jdbc/query db/db-spec
                      ["select * from todo where id = ?" id])))
+
+(defn update-todo [id title]
+  (jdbc/update! db/db-spec
+                :todo
+                {:title title}
+                ["id = ?" id]))
