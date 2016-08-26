@@ -18,7 +18,9 @@
          [:button.bg-green "追加"])]
        (layout/common req)))
 
-(defn todo-complete-view [req]
+(defn todo-show-view [req todo]
   (->> [:section.card
-        [:h2 "TODOを追加しました!"]]
+        (when-let [{:keys [msg]} (:flash req)]
+          [:div.alert.alert-success [:strong msg]])
+        [:h2 (:title todo)]]
        (layout/common req)))

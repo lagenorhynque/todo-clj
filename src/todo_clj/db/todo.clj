@@ -5,5 +5,10 @@
 (defn save-todo [title]
   (jdbc/insert! db/db-spec :todo {:title title}))
 
-(defn find-todo-all []
-  (jdbc/query db/db-spec "select * from todo"))
+(defn find-all-todos []
+  (jdbc/query db/db-spec
+              "select * from todo"))
+
+(defn find-first-todo [id]
+  (first (jdbc/query db/db-spec
+                     ["select * from todo where id = ?" id])))

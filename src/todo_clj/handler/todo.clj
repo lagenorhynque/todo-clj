@@ -5,7 +5,7 @@
             [todo-clj.view.todo :as view]))
 
 (defn todo-index [req]
-  (-> (view/todo-index-view req (todo/find-todo-all))
+  (-> (view/todo-index-view req (todo/find-all-todos))
       res/response
       res/html))
 
@@ -15,13 +15,19 @@
       res/html))
 
 (defn todo-new-post [{:as req :keys [params]}]
-  (when (todo/save-todo (:title params))
-    (-> (view/todo-complete-view req)
-        res/response
+  (if-let [todo (first (todo/save-todo (:title params)))]
+    (-> (res/redirect (str "/todo/" (:id todo)))
+        (assoc :flash {:msg "TODOを正常に追加しました!"})
         res/html)))
 
 (defn todo-search [req] "TODO search")
-(defn todo-show [req] "TODO show")
+
+(defn todo-show [{:as req :keys [params]}]
+  (if-let [todo (todo/find-first-todo (Long/parseLong (:todo-id params)))]
+    (-> (view/todo-show-view req todo)
+        res/response
+        res/html)))
+
 (defn todo-edit [req] "TODO edit")
 (defn todo-edit-post [req] "TODO edit post")
 (defn todo-delete [req] "TODO delete")
