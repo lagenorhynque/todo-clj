@@ -2,6 +2,13 @@
   (:require [hiccup.form :as hf]
             [todo-clj.view.layout :as layout]))
 
+(defn error-messages [req]
+  (when-let [errors (:errors req)]
+    [:ul
+     (for [[k v] errors
+           msg v]
+       [:li.error-message msg])]))
+
 (defn todo-index-view [req todo-list]
   (->> [:section.card
         (when-let [{:keys [msg]} (:flash req)]
@@ -18,6 +25,7 @@
         [:h2 "TODO 追加"]
         (hf/form-to
          [:post "/todo/new"]
+         (error-messages req)
          [:input {:name :title
                   :placeholder "TODOを入力してください"}]
          [:button.bg-green "追加"])]
@@ -41,6 +49,7 @@
           [:h2 "TODO 編集"]
           (hf/form-to
            [:post (str "/todo/" todo-id "/edit")]
+           (error-messages req)
            [:input {:name :title
                     :value (:title todo)
                     :placeholder "TODOを入力してください"}]
