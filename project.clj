@@ -7,7 +7,9 @@
                  [ring "1.5.0"]
                  [compojure "1.5.1"]
                  [hiccup "1.0.5"]
-                 [environ "1.0.3"]]
+                 [environ "1.0.3"]
+                 [org.clojure/java.jdbc "0.6.2-alpha3"]
+                 [org.postgresql/postgresql "9.4-1205-jdbc42"]]
   :plugins [[lein-environ "1.0.3"]]
   :profiles
   {:dev {:source-paths ["src" "test"]
