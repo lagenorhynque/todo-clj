@@ -10,7 +10,8 @@
                  [environ "1.0.3"]
                  [org.clojure/java.jdbc "0.6.2-alpha3"]
                  [org.postgresql/postgresql "9.4-1205-jdbc42"]
-                 [bouncer "1.0.0"]]
+                 [bouncer "1.0.0"]
+                 [ring/ring-defaults "0.2.1"]]
   :plugins [[lein-environ "1.0.3"]]
   :profiles
   {:dev {:source-paths ["src" "test"]

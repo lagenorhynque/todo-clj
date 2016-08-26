@@ -1,5 +1,6 @@
 (ns todo-clj.view.todo
   (:require [hiccup.form :as hf]
+            [ring.util.anti-forgery :refer [anti-forgery-field]]
             [todo-clj.view.layout :as layout]))
 
 (defn error-messages [req]
@@ -25,6 +26,7 @@
         [:h2 "TODO 追加"]
         (hf/form-to
          [:post "/todo/new"]
+         (anti-forgery-field)
          (error-messages req)
          [:input {:name :title
                   :placeholder "TODOを入力してください"}]
@@ -49,6 +51,7 @@
           [:h2 "TODO 編集"]
           (hf/form-to
            [:post (str "/todo/" todo-id "/edit")]
+           (anti-forgery-field)
            (error-messages req)
            [:input {:name :title
                     :value (:title todo)
@@ -62,6 +65,7 @@
           [:h2 "TODO 削除"]
           (hf/form-to
            [:post (str "/todo/" todo-id "/delete")]
+           (anti-forgery-field)
            [:p "次のTODOを本当に削除しますか?"]
            [:p "*" (:title todo)]
            [:button.bg-red "削除"])]
