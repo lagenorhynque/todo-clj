@@ -11,7 +11,10 @@
                  [org.clojure/java.jdbc "0.6.2-alpha3"]
                  [org.postgresql/postgresql "9.4-1205-jdbc42"]
                  [bouncer "1.0.0"]
-                 [ring/ring-defaults "0.2.1"]]
+                 [ring/ring-defaults "0.2.1"]
+                 [metosin/ring-http-response "0.8.0"]
+                 [slingshot "0.12.2"]
+                 [potemkin "0.4.3"]]
   :plugins [[lein-environ "1.0.3"]]
   :profiles
   {:dev {:source-paths ["src" "test"]
